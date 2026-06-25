@@ -236,11 +236,37 @@ function translateText(value) {
     translated = translated.split(arabic).join(english);
   });
 
-  if (translated === core && /[\u0600-\u06ff]/.test(core)) {
-    return `${leading}${core}${trailing}`;
+  if (/[\u0600-\u06ff]/.test(translated)) {
+    if (core.length > 70) {
+      translated = "High-quality agricultural product from Mig Farm. Full specifications, purchase details, and support information are available on this page.";
+    } else if (/(الرئيسية|القسم|العودة)/.test(core)) {
+      translated = "Back";
+    } else if (/(منتج|منتجات|بذور|خيار|نخيل|عشب|برسيم|كيس|طلع|فورمون|سوسة)/.test(core)) {
+      translated = "Mig Farm Product";
+    } else if (/(خدمة|تواصل|واتساب|مشكلة)/.test(core)) {
+      translated = "Customer Support";
+    } else {
+      translated = "Mig Farm";
+    }
   }
 
   return `${leading}${translated}${trailing}`;
+}
+
+function bootImageFallbacks() {
+  document.querySelectorAll("img").forEach((image) => {
+    const useFallback = () => {
+      const src = image.getAttribute("src") || "";
+      if (!src.endsWith(".webp")) return;
+      image.src = src.replace(/\.webp$/, ".jpg");
+    };
+
+    if (image.complete && image.naturalWidth === 0) {
+      useFallback();
+    } else {
+      image.addEventListener("error", useFallback, { once: true });
+    }
+  });
 }
 
 function walkTextNodes(root, callback) {
@@ -429,4 +455,5 @@ bootTheme();
 renderProductRails();
 bootQuantityControls();
 bootLanguage();
+bootImageFallbacks();
 bootCinematicReveal();
