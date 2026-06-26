@@ -6,35 +6,35 @@ const products = [
   {
     title: "برسيم نجم الصيف (ALFALFA NAJEM ALSEAYF)",
     price: "Dhs. 140.00",
-    image: "assets/product-alfalfa.webp",
+    image: "assets/product-alfalfa.jpg",
     url: "product-alfalfa.html",
     action: "عرض الخيارات",
   },
   {
     title: "عشبة الفيل حزمة 1kg",
     price: "Dhs. 22.00",
-    image: "assets/product-elephant-grass.webp",
+    image: "assets/product-elephant-grass.jpg",
     url: "product-elephant-grass.html",
     action: "عرض المنتج",
   },
   {
     title: "عشب بونيكام برازيلي 1 كجم",
     price: "Dhs. 95.00",
-    image: "assets/product-brazilian-bunicam.webp",
+    image: "assets/product-brazilian-bunicam.jpg",
     url: "product-brazilian-bunicam.html",
     action: "عرض المنتج",
   },
   {
     title: "بذور عشبة كاتامبورا رودس 1 كجم",
     price: "Dhs. 52.00 - Dhs. 520.00",
-    image: "assets/product-katambora-rhodes.webp",
+    image: "assets/product-katambora-rhodes.jpg",
     url: "product-katambora-rhodes.html",
     action: "عرض الخيارات",
   },
   {
     title: "عشب السودان حزمة 1kg",
     price: "Dhs. 22.00",
-    image: "assets/product-sudan-grass.webp",
+    image: "assets/product-sudan-grass.jpg",
     url: "product-sudan-grass.html",
     action: "عرض المنتج",
   },
@@ -257,8 +257,8 @@ function bootImageFallbacks() {
   document.querySelectorAll("img").forEach((image) => {
     const useFallback = () => {
       const src = image.getAttribute("src") || "";
-      if (!src.endsWith(".webp")) return;
-      image.src = src.replace(/\.webp$/, ".jpg");
+      if (!src.endsWith(".jpg")) return;
+      image.src = src.replace(/\.jpg$/, ".webp");
     };
 
     if (image.complete && image.naturalWidth === 0) {
